@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Уведомление</title>
+</head>
+<body>
+    <h2>Здравствуйте! Новый  <a href="{{ link }}">пост</a> в вашей избранной категории </h2>
+        <p>{{ post.content|trancatechars:50 }}</p>
+</body>
+</html>

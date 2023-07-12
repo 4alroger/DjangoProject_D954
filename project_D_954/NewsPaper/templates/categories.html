@@ -1,0 +1,19 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+    Categories
+{% endblock title %}
+{% block content %}
+    <h1>Страница всех категорий+</h1>
+    <hr>
+
+    {% if is_not_subscriber %}
+    <p class="text-center mt-5"><a href="{}">Подписаться</a></p>
+    {% endif %}
+
+    {% for category in categories %}
+        <a href="{% url 'category_list2' category.id%}"> {{ category.name }}</a>
+    {% endfor %}
+
+    
+
+{% endblock content %}

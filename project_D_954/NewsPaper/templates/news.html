@@ -1,0 +1,51 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/news-styles.css' %}">
+
+<h1>Все новости</h1>
+<hr>
+{% if post %}
+	<table>
+		<tr class="table-head">
+			<td>Заголовок</td>
+			<td style="width: 15%;">Дата публикации</td>
+			<td>Содержание</td>
+			<td style="width: 10%;">Изменить</td>
+		</tr>
+		{% for i in posts %}
+		<tr>
+			<td>{{ i.name|censor }}</td>
+			<td>{{ i.time_in|date:'d.m.Y' }}</td>
+			<td>{{ i.content|truncatechars:20 }}</td>
+			<td><a href="{{ i.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<h2>Новостей нет!</h2>
+{% endif %}
+
+{% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+   {{ page_obj.number }}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
+{% endblock content %}

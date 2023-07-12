@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+<!-- Название у нас будет Author -->
+{% block title %}
+author
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам класс, идентификатор которого был передан в url -->
+{% block content %}
+<h1>Страница Автора: {{ author.user.username }}</h1>
+{% for post in posts %}
+        <h2>{{ post.title }}</h2>
+        Категории:
+        {% for category in post.category.all %}
+            <a href="{% url 'category_list2' category.id%}"> {{ category.name }}</a>
+        {% endfor %}
+        <br>
+        {{ post.content }}
+        <button><a class="text-center" href="/news/{{post.id}}">читать статью</a> </button>
+        <br>
+{% endfor %}
+{% endblock content %}

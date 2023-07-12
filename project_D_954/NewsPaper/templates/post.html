@@ -1,0 +1,34 @@
+{% extends 'flatpages/default.html' %}
+
+{% load static %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/styles.css' %}">
+
+<h1>Новость - {{ post.id }}</h1>
+<hr>
+<table>
+		<tr class="table-head">
+			<td>Заголовок</td>
+			<td>Содержание</td>
+			<td class="date-time-collumn">Дата публикации</td>
+			<td>Категория</td>
+		</tr>
+		<tr>
+			<td>{{ post.title|censor }}</td>
+			<td>{{ post.content|censor }}</td>
+			<td>{{ post.time_in|date:'d m Y' }}</td>
+			<td>{% for category in post.category.all %}
+				<a href="{% url 'category_list2' category.id%}"> {{ category }}</a>
+			{% endfor %}
+			</td>
+		</tr>
+</table>
+<a href="{% url 'post_edit' post.pk %}">Редактировать</a>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Create post
+{% endblock title %}
+
+{% block content %}
+<h1>Выберите тип вашего поста</h1>
+<hr>
+<div>
+    <a href="/news/create"><input type="submit" value="Новость"></a>
+    <a href="/articles/create"><input type="submit" value="Статья"></a>
+</div>
+{% endblock content %}
